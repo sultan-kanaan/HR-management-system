@@ -56,8 +56,30 @@ employee.prototype.generateSalary = function()
     let omar   = new employee("Omar Zaid","Development","Senior","assest/Omar Zaid.jpg");
     let rana   = new employee("Rana Saleh","Development","Junior","assest/Rana Saleh.jpg");
     let hadi   = new employee("Hadi Ahmad","Finance","Mid-senior","assest/Hadi Ahmad.jpg");
+   
+    function saveEmployee (){
+      let saveformat = JSON.stringify(allEmployee);
+      localStorage.setItem("emploeey",saveformat)
+    }
+
+    function getData(){
+      let emploeey = localStorage.getItem("emploeey")
+      let parseemploeey = JSON.parse(emploeey);
+      allEmployee = []
+      if (parseemploeey !== null){
         
-    form.addEventListener("submit", handelsubmit)
+        for (let i = 0 ; i < parseemploeey.length ; i++ ){
+          new employee(parseemploeey[i].fullName, parseemploeey[i].department,parseemploeey[i].level,parseemploeey[i].imageURL)
+  
+  
+        }
+      }
+      renderAll();
+    }
+
+
+    
+   form.addEventListener("submit", handelsubmit)
       function handelsubmit(event){
         event.preventDefault();
         
@@ -68,9 +90,11 @@ employee.prototype.generateSalary = function()
         
         let newEmployee = new employee(name,department,level,imageURL)
         form.reset();
-        newEmployee.generateSalary()
-        newEmployee.getId()
-        newEmployee.showEmployee()
+        newEmployee.generateSalary();
+        newEmployee.getId();
+        newEmployee.showEmployee();
+        saveEmployee();
+
     }
    
 
@@ -113,8 +137,8 @@ employee.prototype.generateSalary = function()
           allEmployee[i].generateSalary();
           allEmployee[i].showEmployee();
         }
-        console.log(allEmployee)
       }
-      renderAll()
+      renderAll();
+      getData();
 
       // sultan kanaan
