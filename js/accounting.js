@@ -1,6 +1,7 @@
 
 let tabel = document.getElementById("table");
-let countEmploeey = JSON.parse(localStorage.getItem("employee"));
+let countEmploeey = JSON.parse(localStorage.getItem("emploeey"));
+console.log(countEmploeey)
 
 function renderHeader(){
     let tr = document.createElement("tr");
